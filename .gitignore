@@ -1,0 +1,32 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+venv/
+.venv/
+.env
+.ipynb_checkpoints/
+
+# Java
+*.class
+*.log
+
+# R
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Build outputs
+build/
+dist/

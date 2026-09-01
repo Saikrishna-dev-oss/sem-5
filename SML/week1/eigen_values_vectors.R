@@ -1,0 +1,4 @@
+A = matrix(c(1, 8, 9, 16, 2, 7, 10, 15, 3, 6, 11, 14, 4, 5, 12, 13), nrow = 4, ncol = 4, byrow = TRUE)
+A
+
+print(eigen(A))
