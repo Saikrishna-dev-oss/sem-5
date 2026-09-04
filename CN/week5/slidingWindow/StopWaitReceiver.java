@@ -1,43 +1,25 @@
 package slidingWindow;
-//RECEIVER//
+
 import java.io.*;
 import java.net.*;
 
-class StopWaitReceiver
-{
-    public static void main(String args[]) throws Exception
-    {
-        StopWaitReceiver swr = new StopWaitReceiver();
-        swr.run();
-    }
+public class StopWaitReceiver {
+    public static void main(String[] args) throws Exception {
+        ServerSocket server = new ServerSocket(9999);
+        Socket socket = server.accept();
 
-    public void run() throws Exception
-    {
-        String temp = "any message", str = "exit";
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
 
-        ServerSocket myss = new ServerSocket(9999);
-        Socket ss_accept = myss.accept();
-
-        BufferedReader ss_bf = new BufferedReader(new InputStreamReader(ss_accept.getInputStream()));
-        PrintStream myps = new PrintStream(ss_accept.getOutputStream());
-
-        while (temp.compareTo(str) != 0)
-        {
-            Thread.sleep(1000);
-            temp = ss_bf.readLine();
-
-            if (temp.compareTo(str) == 0)
-            {
-                break;
-            }
-
-            System.out.println("Frame " + temp + " was received");
+        String frame;
+        while ((frame = in.readLine()) != null && !frame.equals("exit")) {
+            System.out.println("Frame " + frame + " was received");
             Thread.sleep(500);
-            myps.println("Received");
+            out.println("Received");
         }
 
         System.out.println("ALL FRAMES WERE RECEIVED SUCCESSFULLY");
-        ss_accept.close();
-        myss.close();
+        socket.close();
+        server.close();
     }
 }

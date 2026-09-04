@@ -1,52 +1,32 @@
 package slidingWindow;
-// /SENDER//
+
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
-class StopWaitSender
-{
-    public static void main(String args[]) throws Exception
-    {
-        StopWaitSender sws = new StopWaitSender();
-        sws.run();
-    }
-
-    public void run() throws Exception
-    {
+public class StopWaitSender {
+    public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter no of frames to be sent:");
         int n = sc.nextInt();
+        sc.close();
 
-        Socket myskt = new Socket("localhost", 9999);
-        PrintStream myps = new PrintStream(myskt.getOutputStream());
+        Socket socket = new Socket("localhost", 9999);
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-        for (int i = 0; i <= n; )
-        {
-            if (i == n)
-            {
-                myps.println("exit");
-                break;
-            }
-
+        for (int i = 0; i < n; i++) {
             System.out.println("Frame no " + i + " is sent");
-            myps.println(i);
+            out.println(i);
 
-            BufferedReader bf = new BufferedReader(new InputStreamReader(myskt.getInputStream()));
-            String ack = bf.readLine();
-
-            if (ack != null)
-            {
+            String ack = in.readLine();
+            if (ack != null) {
                 System.out.println("Acknowledgement was Received from receiver");
-                i++;
-                Thread.sleep(4000);
-            }
-            else
-            {
-                myps.println(i);
+                Thread.sleep(1000); // reduced wait time for faster testing
             }
         }
-        sc.close();
-        myskt.close();
+
+        out.println("exit");
+        socket.close();
     }
 }
