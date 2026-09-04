@@ -30,3 +30,4 @@ venv/
 # Build outputs
 build/
 dist/
+.Rproj.user
