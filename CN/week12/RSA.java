@@ -41,7 +41,7 @@ public class RSA {
         }
 
         // 3. Take user input
-        System.out.print("enter the original msg: ");
+        System.out.print("Enter the original msg: ");
         String originalMsg = scanner.nextLine();
 
         // 4. Output Keys & Encryption (Encrypt each char: C = M^e % n)

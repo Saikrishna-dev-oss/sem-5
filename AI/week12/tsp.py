@@ -20,29 +20,20 @@ visited[0] = True
 best_cost = float('inf')
 best_path = []
 
-# DFS Implementation
-# i = 1
-# ans = float('inf')
-# for row in graph:
-
-#     r = row
-#     r.remove(0)
-#     ans = min(ans, *r)
-#     r.index(ans)
-# print(ans)
-
-
 
 
 
 def tsp_dfs(city, count, cost, path):
     global best_cost, best_path
 
-    if count == n:
-        cost += graph[city][0]
+    if cost >= best_cost:
+        return
 
-        best_cost = min(best_cost, cost)
-        best_path += path + [0]
+    if count == n:
+        total_cost = cost + graph[city][0]
+        if total_cost < best_cost:
+            best_cost = total_cost
+            best_path = path + [0]
         return
     
     # Try every Unvisited City
