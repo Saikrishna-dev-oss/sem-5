@@ -8,7 +8,7 @@ def tsp_dfs(city, count, cost, path, graph, visited):
         return
 
     # Base case: visited all cities, return to start city (1)
-    if count == n:
+    if count == len(graph):
         if 1 in graph[city]:
             total_cost = cost + graph[city][1]
             if total_cost < best_cost:
@@ -29,7 +29,6 @@ graph = {
     4: {1: 20, 2: 25, 3: 30},
 }
 
-n = len(graph)
 visited = set([1])  # Start at city 1
 
 best_cost = float('inf')
