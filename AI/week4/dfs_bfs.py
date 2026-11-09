@@ -1,12 +1,8 @@
 # DFS BFS Implementation
 def dfs(graph, visited, stack):
-    
     while stack:
-
         current = stack.pop()      # Take the top node
-
         if current not in visited:
-
             visited.append(current)
 
             for neighbour in reversed(graph[current]):
