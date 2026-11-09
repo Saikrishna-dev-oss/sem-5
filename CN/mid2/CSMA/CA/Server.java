@@ -7,10 +7,8 @@ class Server {
         System.out.println("Waiting for connection...");
 
         Socket s = ss.accept();
-        BufferedReader in = new BufferedReader(
-            new InputStreamReader(s.getInputStream()));
-        PrintWriter out = new PrintWriter(
-            s.getOutputStream(), true);
+        BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        PrintWriter out = new PrintWriter(s.getOutputStream(), true);
 
         System.out.println("Received: " + in.readLine());
         out.println("Received successfully");

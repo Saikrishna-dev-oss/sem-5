@@ -33,4 +33,24 @@ def csp():
                                                 # print("Y = ", Y)
                                             
 
-csp()                           
+# csp()                           
+
+def csp2():
+    v = "ONETW"
+    for O in range(1, 10):
+        for N in range(10):
+            for E in range(10):
+                for T in range(10):
+                    for W in range(1, 10):
+
+                        if len({O, N, E, T, W}) == 5:
+
+                            ONE = O * 100 + N * 10 + E
+                            TWO = T * 100 + W * 10 + O
+
+                            if ONE + ONE == TWO:
+                                for ele in v:
+                                    print(f"{ele} = ", eval(ele))
+                                print("-"*10)
+
+csp2()

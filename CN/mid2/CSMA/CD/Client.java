@@ -5,7 +5,6 @@ import java.util.*;
 class Client {
     public static void main(String[] args) throws Exception {
         Random r = new Random();
-
         for (int i = 1; i <= 5; i++) {
             System.out.println("\nAttempt: " + i);
 
@@ -17,8 +16,7 @@ class Client {
             } else {
                 try {
                     Socket s = new Socket("localhost", 5000);
-                    PrintWriter out = new PrintWriter(
-                        s.getOutputStream(), true);
+                    PrintWriter out = new PrintWriter(s.getOutputStream(), true);
                     out.println("CNLABS");
                     System.out.println("Message sent successfully");
                     s.close();
