@@ -11,7 +11,7 @@ public class StopWaitSender {
         int n = sc.nextInt();
         sc.close();
 
-        Socket socket = new Socket("localhost", 9999);
+        Socket socket = new Socket("localhost", 6262);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
