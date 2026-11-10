@@ -7,7 +7,7 @@ public class ChatClient {
     public static void main(String args[]) throws Exception {
         Socket socket = new Socket("127.0.0.1", 6262);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintStream out = new PrintStream(socket.getOutputStream());
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
         String s;
 

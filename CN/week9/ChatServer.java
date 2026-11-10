@@ -8,7 +8,7 @@ public class ChatServer {
         ServerSocket ss = new ServerSocket(6262);
         Socket socket = ss.accept();
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintStream out = new PrintStream(socket.getOutputStream());
+        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
         String s;
 
