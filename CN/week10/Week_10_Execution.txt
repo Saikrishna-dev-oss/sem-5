@@ -1,0 +1,256 @@
+WEEK 10 — EXPERIMENT 3: FTP AND TFTP FILE TRANSFER
+============================================================
+
+Packet Tracer file: FileTransferProtocol_TFTP.pkt
+
+AIM
+---
+Configure and use FTP and TFTP to transfer a file between PCs and Server0.
+
+DEVICES IN THE SAVED FILE
+-------------------------
+- 2 routers: Router0 and Router1 (Cisco ISR4331)
+- 2 switches: Switch0 and Switch1 (Switch-PT)
+- 3 PCs: PC0, PC1 and PC2
+- 1 server: Server0 (Server-PT)
+
+IMPORTANT INTERFACE DETAILS
+---------------------------
+Use the interfaces present in this saved Packet Tracer file:
+
+- Router LAN interface: GigabitEthernet0/0/0
+- Router-to-router interface: GigabitEthernet0/0/1
+- Router-facing switch port: FastEthernet2/1
+
+STEP 1 — OPEN THE FILE AND CHECK THE TOPOLOGY
+---------------------------------------------
+1. Open Cisco Packet Tracer.
+2. Open FileTransferProtocol_TFTP.pkt.
+3. Check that Router0, Router1, Switch0, Switch1, PC0, PC1, PC2 and Server0
+   are present.
+4. Check that all links are connected.
+
+STEP 2 — CHECK IP CONFIGURATION
+-------------------------------
+On each PC:
+1. Click the PC.
+2. Open Desktop > IP Configuration.
+3. Check the following settings:
+
+   PC0
+   IP address:      1.1.1.2
+   Subnet mask:     255.0.0.0
+   Default gateway: 1.1.1.1
+
+   PC1
+   IP address:      1.1.1.3
+   Subnet mask:     255.0.0.0
+   Default gateway: 1.1.1.1
+
+   PC2
+   IP address:      2.2.2.3
+   Subnet mask:     255.0.0.0
+   Default gateway: 2.2.2.1
+
+4. Click Server0 > Desktop > IP Configuration and check:
+
+   IP address:      2.2.2.2
+   Subnet mask:     255.0.0.0
+   Default gateway: 2.2.2.1
+
+STEP 3 — CHECK ROUTER INTERFACES
+-------------------------------
+On Router0, open CLI and enter:
+
+  enable
+  show ip interface brief
+
+Check:
+  GigabitEthernet0/0/0 = 1.1.1.1
+  GigabitEthernet0/0/1 = 3.3.3.3
+
+On Router1, open CLI and enter:
+
+  enable
+  show ip interface brief
+
+Check:
+  GigabitEthernet0/0/0 = 2.2.2.1
+  GigabitEthernet0/0/1 = 3.3.3.4
+
+The router-to-router link uses:
+  Router0: 3.3.3.3
+  Router1: 3.3.3.4
+
+STEP 4 — CHECK ROUTING
+---------------------
+The saved router configurations use RIP network statements.
+
+On EACH router:
+1. Open CLI.
+2. Enter:
+
+  enable
+  show running-config
+
+3. Find the router rip section and check for these network statements:
+
+  network 1.0.0.0
+  network 2.0.0.0
+  network 3.0.0.0
+
+Important:
+The saved Packet Tracer file uses RIP. The PDF describes static routes using
+ip route, but those static route commands are not present in the saved file.
+The saved configuration also does not show 'version 2' or 'no auto-summary'.
+Do not mix the PDF's static-routing configuration with the saved file's RIP
+configuration unless your instructor specifically asks you to change it.
+
+STEP 5 — ENABLE FTP AND TFTP SERVICES ON SERVER0
+------------------------------------------------
+1. Click Server0.
+2. Open the Services tab.
+3. Select FTP.
+4. Turn the FTP service ON.
+5. If the lab requires an FTP account, add the username and password provided
+   by your instructor and enable the required file permissions.
+6. Select TFTP in the Services list.
+7. Turn the TFTP service ON, if it is not already enabled.
+
+Note:
+The supplied details do not specify the FTP username or password. Use the
+credentials configured in your Packet Tracer Server0. Do not assume a default
+username or password.
+
+STEP 6 — CREATE A.TXT ON PC0
+----------------------------
+1. Click PC0.
+2. Open Desktop > Text Editor.
+3. Type a short sample message, for example:
+
+   This is a Computer Networks Lab file transfer test.
+
+4. Save the file as:
+
+   A.txt
+
+STEP 7 — UPLOAD A.TXT USING FTP FROM PC0
+----------------------------------------
+1. Click PC0.
+2. Open Desktop > Command Prompt.
+3. Enter:
+
+  ftp 2.2.2.2
+
+4. When prompted, enter the FTP username and password configured on Server0.
+5. At the ftp> prompt, enter:
+
+  put A.txt
+
+6. After the upload completes, enter:
+
+  quit
+
+Expected result:
+A.txt is uploaded to the FTP server (Server0).
+
+STEP 8 — DOWNLOAD A.TXT USING FTP FROM PC2
+------------------------------------------
+1. Click PC2.
+2. Open Desktop > Command Prompt.
+3. Enter:
+
+  ftp 2.2.2.2
+
+4. Log in using the same FTP credentials.
+5. At the ftp> prompt, enter:
+
+  get A.txt
+
+6. Exit FTP:
+
+  quit
+
+7. Check the downloaded file:
+
+  dir
+  type A.txt
+
+Expected result:
+The contents of A.txt are displayed on PC2.
+
+STEP 9 — UPLOAD A.TXT USING TFTP FROM PC0
+-----------------------------------------
+1. Make sure A.txt exists on PC0.
+2. Click PC0.
+3. Open Desktop > Command Prompt.
+4. Enter:
+
+  tftp -i 2.2.2.2 put A.txt
+
+Expected result:
+The file is uploaded to Server0 using TFTP.
+
+STEP 10 — DOWNLOAD A.TXT USING TFTP FROM PC2
+--------------------------------------------
+1. Click PC2.
+2. Open Desktop > Command Prompt.
+3. Enter:
+
+  tftp -i 2.2.2.2 get A.txt
+
+4. Verify the downloaded file:
+
+  dir
+  type A.txt
+
+Expected result:
+The contents of A.txt are displayed on PC2.
+
+STEP 11 — SAVE THE PACKET TRACER FILE
+-------------------------------------
+1. Check that the network and file transfer tests are complete.
+2. Press Ctrl + S.
+3. Keep the filename:
+
+  FileTransferProtocol_TFTP.pkt
+
+QUICK COMMAND SUMMARY
+--------------------
+Check router interfaces:
+  show ip interface brief
+
+Check router configuration:
+  show running-config
+
+Check routing table:
+  show ip route
+
+FTP upload from PC0:
+  ftp 2.2.2.2
+  put A.txt
+  quit
+
+FTP download from PC2:
+  ftp 2.2.2.2
+  get A.txt
+  quit
+  dir
+  type A.txt
+
+TFTP upload from PC0:
+  tftp -i 2.2.2.2 put A.txt
+
+TFTP download from PC2:
+  tftp -i 2.2.2.2 get A.txt
+
+IMPORTANT TROUBLESHOOTING
+-------------------------
+- If PC0 cannot reach Server0, first check the IP addresses and default gateways.
+- Check that router interfaces are up.
+- Check that RIP is configured on both routers and that the remote LAN route
+  appears in show ip route.
+- Check that FTP and TFTP services are ON on Server0.
+- For FTP, verify the username, password and file permissions.
+- Confirm that A.txt was saved on PC0 before attempting to upload it.
+- If the first network ping fails, retry after routing has converged.
