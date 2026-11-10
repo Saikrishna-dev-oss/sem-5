@@ -1,4 +1,4 @@
-package window;
+package gobackn;
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;

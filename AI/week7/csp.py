@@ -40,8 +40,8 @@ def csp2():
     for O in range(1, 10):
         for N in range(10):
             for E in range(10):
-                for T in range(10):
-                    for W in range(1, 10):
+                for T in range(1, 10):
+                    for W in range(10):
 
                         if len({O, N, E, T, W}) == 5:
 
