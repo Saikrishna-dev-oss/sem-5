@@ -23,7 +23,7 @@ public class BitStuffing {
         
         String border = "-".repeat(new1.length() + 1);
         System.out.println(border);
-        System.out.println(" " + new1);
+        System.out.println(new1);
         System.out.println(border);
 
         // 4. Bit Destuffing: remove the stuffed '0' after every 5 consecutive '1's
