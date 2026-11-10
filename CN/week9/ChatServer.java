@@ -5,7 +5,7 @@ import java.net.*;
 
 public class ChatServer {
     public static void main(String args[]) throws Exception {
-        ServerSocket ss = new ServerSocket(2000);
+        ServerSocket ss = new ServerSocket(6262);
         Socket sk = ss.accept();
         BufferedReader in = new BufferedReader(new InputStreamReader(sk.getInputStream()));
         PrintStream out = new PrintStream(sk.getOutputStream());
