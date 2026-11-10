@@ -15,7 +15,7 @@ class Client {
                 Thread.sleep(R * 1000);
             } else {
                 try {
-                    Socket s = new Socket("localhost", 5000);
+                    Socket s = new Socket("localhost", 6262);
                     PrintWriter out = new PrintWriter(s.getOutputStream(), true);
                     out.println("CNLABS");
                     System.out.println("Message sent successfully");
